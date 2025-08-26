@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="mb-3">📤 Upload Student Data</h2>
+        <p class="text-muted">
+            Please upload a <b>CSV</b> or <b>Excel</b> file containing the following columns:
+            <code>Attendance</code>, <code>Study_Hours</code>, and <code>Past_Result</code>.
+            Optionally, you may include <code>Student_ID</code> for easier identification.
+        </p>
+
+        <!-- Upload Form -->
+        <form method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm border">
+
+            <!-- File Input -->
+            <div class="mb-3">
+                <label for="file" class="form-label fw-bold">Select CSV/Excel File</label>
+                <input class="form-control" type="file" id="file" name="file" accept=".csv,.xlsx,.xls" required>
+                <small class="form-text text-muted">Allowed formats: CSV, XLSX, XLS</small>
+            </div>
+
+            <!-- Risk Threshold Input -->
+            <div class="mb-3">
+                <label for="threshold" class="form-label fw-bold">High-Risk Threshold</label>
+                <input class="form-control" type="number" id="threshold" name="threshold" value="40" step="1" min="0"
+                    max="100">
+                <small class="form-text text-muted">
+                    Students with predicted scores <b>below</b> this value will be marked as <span
+                        class="text-danger fw-bold">HIGH RISK</span>.
+                </small>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex align-items-center">
+                <button class="btn btn-success me-3" type="submit">
+                    🚀 Upload & Predict
+                </button>
+                <a class="btn btn-secondary" href="{{ url_for('index') }}">
+                    ⬅ Back to Home
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Instructions Card -->
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">📌 Instructions</h5>
+                <ul class="small">
+                    <li>Ensure the file has correct column names.</li>
+                    <li>Download <a href="{{ url_for('download_sample') }}">sample CSV</a> for reference.</li>
+                    <li>After uploading, you'll see a preview of predicted results.</li>
+                    <li>Full results can be exported as Excel.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mb-3">📊 Prediction Results</h2>
+        <p class="text-muted">
+            Below is a preview of the predictions. Students marked in
+            <span class="badge bg-danger">HIGH RISK</span> are predicted to score
+            below the threshold you set.
+        </p>
+
+        <!-- Results Table -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                    {{ table_html | safe }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex align-items-center mt-3">
+            <a href="{{ download_url }}" class="btn btn-success me-3">
+                ⬇ Download Full Results (Excel)
+            </a>
+            <a href="{{ url_for('upload') }}" class="btn btn-primary me-3">
+                📤 Upload Another File
+            </a>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                ⬅ Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

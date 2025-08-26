@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="mb-3">🎓 Student Performance Prediction</h2>
+        <p>
+            Upload a <b>CSV</b> or <b>Excel</b> file containing student data
+            with the columns <code>Attendance</code>, <code>Study_Hours</code>, and
+            <code>Past_Result</code> to predict exam scores.
+        </p>
+
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg me-3" href="{{ url_for('upload') }}">
+                📤 Upload & Predict
+            </a>
+            <a class="btn btn-secondary btn-lg me-3" href="{{ url_for('train') }}">
+                🔄 Train / Re-train Model
+            </a>
+            <a class="btn btn-success btn-lg" href="{{ url_for('download_sample') }}">
+                ⬇ Download Sample CSV
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">📌 How It Works</h5>
+                <ul>
+                    <li>Step 1: Train or load the ML model.</li>
+                    <li>Step 2: Upload CSV / Excel student data.</li>
+                    <li>Step 3: Predict student exam scores.</li>
+                    <li>Step 4: Export results to Excel.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

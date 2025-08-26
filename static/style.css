@@ -1,0 +1,126 @@
+/* 🌟 General Body Styling */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 40px;
+    color: #333;
+}
+
+/* 🌟 Navbar */
+.navbar {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+/* 🌟 Card Styling */
+.card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* 🌟 Table Styling */
+.table {
+    font-size: 0.95rem;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #0d6efd;
+    /* Bootstrap Primary Blue */
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    padding: 12px;
+}
+
+.table td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Alternate row background */
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f2f7ff;
+}
+
+/* Hover effect */
+.table-hover tbody tr:hover {
+    background-color: #e8f0ff;
+    transition: 0.3s ease-in-out;
+}
+
+/* 🌟 High-risk Highlighting */
+.table .high-risk {
+    background-color: #ffe5e5 !important;
+    color: #d9534f;
+    font-weight: 600;
+}
+
+/* Low-risk Styling */
+.table .low-risk {
+    background-color: #e9ffe5 !important;
+    color: #28a745;
+    font-weight: 600;
+}
+
+/* 🌟 Buttons Styling */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* 🌟 Form Styling */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* 🌟 Alerts Styling */
+.alert {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 12px 15px;
+}
+
+/* 🌟 Footer Styling */
+footer {
+    margin-top: 40px;
+    padding: 15px 0;
+    text-align: center;
+    background-color: #f1f1f1;
+    color: #555;
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+}
+
+/* 🌟 Scrollable Table Container */
+.table-responsive {
+    max-height: 450px;
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
