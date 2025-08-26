@@ -19,7 +19,6 @@ MODEL_PATH = os.path.join(MODEL_DIR, 'best_model.pkl')
 FEATURES = ['Attendance', 'Study_Hours', 'Past_Result']
 TARGET = 'Exam_Score'
 
-
 # ========================
 # Generate Sample Data
 # ========================
@@ -46,7 +45,6 @@ def generate_sample_data(n=300, path=DATA_PATH):
     df.to_csv(path, index=False)
     print(f"✅ Sample data saved to {path}")
     return df
-
 
 # ========================
 # Train & Save Model
@@ -80,7 +78,7 @@ def train_and_save(data_path=DATA_PATH, model_path=MODEL_PATH):
     # ========================
     def eval_model(model):
         preds = model.predict(X_test)
-        # ✅ Fixed RMSE calculation for all sklearn versions
+        # ✅ Works with all sklearn versions
         rmse = np.sqrt(mean_squared_error(y_test, preds))
         mae = mean_absolute_error(y_test, preds)
         r2 = r2_score(y_test, preds)
@@ -104,6 +102,16 @@ def train_and_save(data_path=DATA_PATH, model_path=MODEL_PATH):
 
     return best_model, best_name
 
+# ========================
+# Auto-Train Helper for Deployments
+# ========================
+def train_model_if_missing():
+    """Check if model exists; if not, train automatically."""
+    if not os.path.exists(MODEL_PATH):
+        print("⚠️  Model not found. Training new model...")
+        train_and_save()
+    else:
+        print("✅ Model already exists.")
 
 # ========================
 # Script Execution
