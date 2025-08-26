@@ -3,19 +3,21 @@
 <div class="row">
     <div class="col-md-8">
         <h2 class="mb-3">📤 Upload Student Data</h2>
-        <p class="text-muted">
+        <p class="text-light">
             Please upload a <b>CSV</b> or <b>Excel</b> file containing the following columns:
             <code>Attendance</code>, <code>Study_Hours</code>, and <code>Past_Result</code>.
             Optionally, you may include <code>Student_ID</code> for easier identification.
         </p>
 
         <!-- Upload Form -->
-        <form method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm border">
+        <form method="POST" enctype="multipart/form-data" class="p-4 rounded shadow-sm border"
+            style="background-color: #1f1f1f; color: #e0e0e0; border-color: #333;">
 
             <!-- File Input -->
             <div class="mb-3">
                 <label for="file" class="form-label fw-bold">Select CSV/Excel File</label>
-                <input class="form-control" type="file" id="file" name="file" accept=".csv,.xlsx,.xls" required>
+                <input class="form-control" type="file" id="file" name="file" accept=".csv,.xlsx,.xls" required
+                    style="background-color: #2a2a2a; color: #e0e0e0; border: 1px solid #444;">
                 <small class="form-text text-muted">Allowed formats: CSV, XLSX, XLS</small>
             </div>
 
@@ -23,10 +25,10 @@
             <div class="mb-3">
                 <label for="threshold" class="form-label fw-bold">High-Risk Threshold</label>
                 <input class="form-control" type="number" id="threshold" name="threshold" value="40" step="1" min="0"
-                    max="100">
+                    max="100" style="background-color: #2a2a2a; color: #e0e0e0; border: 1px solid #444;">
                 <small class="form-text text-muted">
                     Students with predicted scores <b>below</b> this value will be marked as <span
-                        class="text-danger fw-bold">HIGH RISK</span>.
+                        style="color:#ff6b6b; font-weight:bold;">HIGH RISK</span>.
                 </small>
             </div>
 
@@ -44,12 +46,13 @@
 
     <!-- Instructions Card -->
     <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm" style="background-color: #1e1e1e; color: #e0e0e0;">
             <div class="card-body">
                 <h5 class="card-title">📌 Instructions</h5>
-                <ul class="small">
+                <ul class="small ">
                     <li>Ensure the file has correct column names.</li>
-                    <li>Download <a href="{{ url_for('download_sample') }}">sample CSV</a> for reference.</li>
+                    <li>Download <a href="{{ url_for('download_sample') }}" style="color:#0d6efd;">sample CSV</a> for
+                        reference.</li>
                     <li>After uploading, you'll see a preview of predicted results.</li>
                     <li>Full results can be exported as Excel.</li>
                 </ul>

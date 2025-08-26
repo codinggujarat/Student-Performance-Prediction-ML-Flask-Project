@@ -1,39 +1,42 @@
-/* 🌟 General Body Styling */
+/* 🌑 General Body */
 body {
-    background-color: #f8f9fa;
+    background-color: #121212;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 40px;
-    color: #333;
+    color: #e0e0e0;
 }
 
-/* 🌟 Navbar */
+/* 🌑 Navbar */
 .navbar {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     font-weight: 500;
 }
 
-/* 🌟 Card Styling */
+/* 🌑 Card */
 .card {
     border-radius: 12px;
     border: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    background-color: #1e1e1e;
 }
 
 .card-body {
     padding: 1.25rem;
 }
 
-/* 🌟 Table Styling */
+/* 🌑 Table */
 .table {
     font-size: 0.95rem;
     border-collapse: collapse;
     border-radius: 8px;
     overflow: hidden;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
 }
 
 .table th {
     background-color: #0d6efd;
-    /* Bootstrap Primary Blue */
     color: #fff;
     text-align: center;
     font-weight: 600;
@@ -43,35 +46,31 @@ body {
 .table td {
     padding: 10px;
     text-align: center;
-    vertical-align: middle;
 }
 
-/* Alternate row background */
 .table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #f2f7ff;
+    background-color: #2a2a2a;
 }
 
-/* Hover effect */
 .table-hover tbody tr:hover {
-    background-color: #e8f0ff;
-    transition: 0.3s ease-in-out;
+    background-color: #333;
+    transition: 0.3s ease;
 }
 
-/* 🌟 High-risk Highlighting */
+/* 🌑 High/Low Risk */
 .table .high-risk {
-    background-color: #ffe5e5 !important;
-    color: #d9534f;
+    background-color: #660000 !important;
+    color: #ff6b6b;
     font-weight: 600;
 }
 
-/* Low-risk Styling */
 .table .low-risk {
-    background-color: #e9ffe5 !important;
-    color: #28a745;
+    background-color: #003300 !important;
+    color: #32cd32;
     font-weight: 600;
 }
 
-/* 🌟 Buttons Styling */
+/* 🌑 Buttons */
 .btn {
     border-radius: 6px;
     font-weight: 500;
@@ -91,36 +90,62 @@ body {
     background-color: #5a6268;
 }
 
-/* 🌟 Form Styling */
+/* 🌑 Forms */
 form {
-    background: #fff;
+    background: #1f1f1f;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* 🌟 Alerts Styling */
+.form-label {
+    color: #e0e0e0;
+}
+
+input.form-control {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+input.form-control:focus {
+    background-color: #2a2a2a;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+/* 🌑 Alerts */
 .alert {
     border-radius: 6px;
     font-weight: 500;
     padding: 12px 15px;
 }
 
-/* 🌟 Footer Styling */
+/* 🌑 Footer */
 footer {
     margin-top: 40px;
     padding: 15px 0;
     text-align: center;
-    background-color: #f1f1f1;
-    color: #555;
+    background-color: #1f1f1f;
+    color: #aaa;
     font-size: 0.9rem;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #333;
 }
 
-/* 🌟 Scrollable Table Container */
+/* 🌑 Scrollable Table */
 .table-responsive {
     max-height: 450px;
     overflow-y: auto;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #333;
+}
+
+/* 🌑 Links */
+a {
+    color: #0d6efd;
+}
+
+a:hover {
+    color: #66b0ff;
+    text-decoration: none;
 }
