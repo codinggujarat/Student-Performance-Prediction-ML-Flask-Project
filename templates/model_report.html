@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="p-6 space-y-6">
+    <!-- Page Title -->
+    <div class="bg-gray-800 shadow-lg rounded-xl p-6 text-center">
+        <h1 class="text-3xl font-bold text-green-400">📊 Model Performance Report</h1>
+        <p class="text-gray-400 mt-2 text-sm">
+            Latest results file: <span class="font-semibold text-white">{{ file_name }}</span>
+        </p>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Score Distribution -->
+        <div class="bg-gray-800 rounded-xl p-5 shadow-lg">
+            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">Predicted Score Distribution</h3>
+            <canvas id="scoreChart" class="w-full h-72"></canvas>
+        </div>
+
+        <!-- High vs Low Risk -->
+        <div class="bg-gray-800 rounded-xl p-5 shadow-lg">
+            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">High vs Low Risk</h3>
+            <canvas id="riskChart" class="w-full h-72"></canvas>
+        </div>
+
+        {% if show_semester_charts %}
+        <!-- Avg Score per Semester -->
+        <div class="bg-gray-800 rounded-xl p-5 shadow-lg">
+            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">Average Score per Semester</h3>
+            <canvas id="avgScoreChart" class="w-full h-72"></canvas>
+        </div>
+
+        <!-- High vs Low Risk per Semester -->
+        <div class="bg-gray-800 rounded-xl p-5 shadow-lg">
+            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">High vs Low Risk per Semester</h3>
+            <canvas id="stackedChart" class="w-full h-72"></canvas>
+        </div>
+        {% else %}
+        <!-- No Semester Data -->
+        <div class="bg-gray-800 rounded-xl p-5 shadow-lg flex items-center justify-center">
+            <p class="text-gray-400 text-center">⚠ Semester data not available in the latest results file.</p>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-5 shadow-lg flex items-center justify-center">
+            <p class="text-gray-400 text-center">⚠ Semester data not available in the latest results file.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-6">
+        <a href="/"
+            class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition">
+            ⬅ Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    
+    // Provided by Flask context
+    const scores = {{ scores | tojson }};
+    const riskCounts = {{ risk_counts | tojson }};
+    const showSemester = {{ show_semester_charts | tojson }};
+    const semesters = {{ semesters | tojson }};
+    const avgScores = {{ avg_scores_list | tojson }};
+    const highCounts = {{ high_counts | tojson }};
+    const lowCounts = {{ low_counts | tojson }};
+
+    // === SCORE DISTRIBUTION ===
+    function binScores(arr, size = 10) {
+        const bins = {};
+        arr.forEach(v => {
+            const bucket = Math.floor(v / size) * size;
+            bins[bucket] = (bins[bucket] || 0) + 1;
+        });
+        const keys = Object.keys(bins).map(Number).sort((a, b) => a - b);
+        return {
+            labels: keys.map(k => `${k}-${k + size - 1}`),
+            values: keys.map(k => bins[k])
+        };
+    }
+    const binned = binScores(scores, 10);
+    new Chart(document.getElementById("scoreChart"), {
+        type: "bar",
+        data: {
+            labels: binned.labels,
+            datasets: [{
+                label: "Students",
+                data: binned.values,
+                backgroundColor: "#34d399"
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { ticks: { color: "#d1d5db" } },
+                y: { ticks: { color: "#d1d5db" } }
+            }
+        }
+    });
+
+    // === HIGH VS LOW RISK ===
+    new Chart(document.getElementById("riskChart"), {
+        type: "doughnut",
+        data: {
+            labels: Object.keys(riskCounts),
+            datasets: [{
+                data: Object.values(riskCounts),
+                backgroundColor: ["#f87171", "#34d399"]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { labels: { color: "#e5e7eb" } }
+            }
+        }
+    });
+
+    // === SEMESTER CHARTS ===
+    if (showSemester) {
+        // Average Score per Semester
+        new Chart(document.getElementById("avgScoreChart"), {
+            type: "line",
+            data: {
+                labels: semesters,
+                datasets: [{
+                    label: "Avg Score",
+                    data: avgScores,
+                    borderColor: "#60a5fa",
+                    backgroundColor: "rgba(96,165,250,0.2)",
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: "#e5e7eb" } }
+                }
+            }
+        });
+
+        // High vs Low Risk per Semester
+        new Chart(document.getElementById("stackedChart"), {
+            type: "bar",
+            data: {
+                labels: semesters,
+                datasets: [
+                    { label: "High", data: highCounts, backgroundColor: "#f87171" },
+                    { label: "Low", data: lowCounts, backgroundColor: "#34d399" }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: "#e5e7eb" } }
+                },
+                scales: {
+                    x: { stacked: true, ticks: { color: "#d1d5db" } },
+                    y: { stacked: true, ticks: { color: "#d1d5db" } }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

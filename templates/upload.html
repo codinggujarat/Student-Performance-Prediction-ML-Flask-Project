@@ -1,63 +1,75 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="row">
-    <div class="col-md-8">
-        <h2 class="mb-3">📤 Upload Student Data</h2>
-        <p class="text-light">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- Left Section -->
+    <div class="md:col-span-2 bg-gray-800 p-6 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-3">📤 Upload Student Data</h2>
+        <p class="text-gray-300 mb-5">
             Please upload a <b>CSV</b> or <b>Excel</b> file containing the following columns:
-            <code>Attendance</code>, <code>Study_Hours</code>, and <code>Past_Result</code>.
-            Optionally, you may include <code>Student_ID</code> for easier identification.
+            <code class="bg-gray-700 text-green-400 px-1 py-0.5 rounded">Attendance</code>,
+            <code class="bg-gray-700 text-green-400 px-1 py-0.5 rounded">Study_Hours</code>, and
+            <code class="bg-gray-700 text-green-400 px-1 py-0.5 rounded">Past_Result</code>.
+            Optionally, you may include <code class="bg-gray-700 text-yellow-400 px-1 py-0.5 rounded">Student_ID</code>
+            for easier identification.
         </p>
 
         <!-- Upload Form -->
-        <form method="POST" enctype="multipart/form-data" class="p-4 rounded shadow-sm border"
-            style="background-color: #1f1f1f; color: #e0e0e0; border-color: #333;">
+        <form method="POST" enctype="multipart/form-data"
+            class="bg-gray-900 p-6 rounded-xl border border-gray-700 shadow-lg space-y-5">
 
             <!-- File Input -->
-            <div class="mb-3">
-                <label for="file" class="form-label fw-bold">Select CSV/Excel File</label>
-                <input class="form-control" type="file" id="file" name="file" accept=".csv,.xlsx,.xls" required
-                    style="background-color: #2a2a2a; color: #e0e0e0; border: 1px solid #444;">
-                <small class="form-text text-muted">Allowed formats: CSV, XLSX, XLS</small>
+            <div>
+                <label for="file" class="block text-gray-200 font-semibold mb-2">Select CSV/Excel File</label>
+                <input
+                    class="w-full p-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type="file" id="file" name="file" accept=".csv,.xlsx,.xls" required>
+                <small class="text-gray-400 text-sm">Allowed formats: CSV, XLSX, XLS</small>
             </div>
 
             <!-- Risk Threshold Input -->
-            <div class="mb-3">
-                <label for="threshold" class="form-label fw-bold">High-Risk Threshold</label>
-                <input class="form-control" type="number" id="threshold" name="threshold" value="40" step="1" min="0"
-                    max="100" style="background-color: #2a2a2a; color: #e0e0e0; border: 1px solid #444;">
-                <small class="form-text text-muted">
-                    Students with predicted scores <b>below</b> this value will be marked as <span
-                        style="color:#ff6b6b; font-weight:bold;">HIGH RISK</span>.
+            <div>
+                <label for="threshold" class="block text-gray-200 font-semibold mb-2">High-Risk Threshold</label>
+                <input
+                    class="w-full p-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    type="number" id="threshold" name="threshold" value="40" step="1" min="0" max="100">
+                <small class="text-gray-400 text-sm">
+                    Students with predicted scores <b>below</b> this value will be marked as
+                    <span class="text-red-400 font-bold">HIGH RISK</span>.
                 </small>
             </div>
 
-            <!-- Submit Button -->
-            <div class="d-flex align-items-center">
-                <button class="btn btn-success me-3" type="submit">
-                    🚀 Upload & Predict
+            <!-- Buttons -->
+            <div class="flex flex-wrap gap-4 mt-4">
+                <button type="submit"
+                    class="bg-green-600 hover:bg-green-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
+                    🚀 <span>Upload & Predict</span>
                 </button>
-                <a class="btn btn-secondary" href="{{ url_for('index') }}">
-                    ⬅ Back to Home
+
+                <a href="{{ url_for('index') }}"
+                    class="bg-gray-600 hover:bg-gray-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
+                    ⬅ <span>Back to Home</span>
+                </a>
+
+                <a href="{{ url_for('model_report') }}"
+                    class="bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
+                    📊 <span>View Model Report</span>
                 </a>
             </div>
         </form>
     </div>
 
     <!-- Instructions Card -->
-    <div class="col-md-4">
-        <div class="card shadow-sm" style="background-color: #1e1e1e; color: #e0e0e0;">
-            <div class="card-body">
-                <h5 class="card-title">📌 Instructions</h5>
-                <ul class="small ">
-                    <li>Ensure the file has correct column names.</li>
-                    <li>Download <a href="{{ url_for('download_sample') }}" style="color:#0d6efd;">sample CSV</a> for
-                        reference.</li>
-                    <li>After uploading, you'll see a preview of predicted results.</li>
-                    <li>Full results can be exported as Excel.</li>
-                </ul>
-            </div>
-        </div>
+    <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+        <h5 class="text-xl font-semibold text-white mb-4">📌 Instructions</h5>
+        <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
+            <li>Ensure the file has correct column names.</li>
+            <li>Download <a href="{{ url_for('download_sample') }}"
+                    class="text-blue-400 underline hover:text-blue-300">sample CSV</a> for reference.</li>
+            <li>After uploading, you'll see a preview of predicted results.</li>
+            <li>Full results can be exported as Excel.</li>
+        </ul>
     </div>
+
 </div>
 {% endblock %}

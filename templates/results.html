@@ -1,32 +1,40 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="mb-3">📊 Prediction Results</h2>
-        <p class="text-muted">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- Left Section -->
+    <div class="lg:col-span-12">
+        <h2 class="text-2xl font-bold mb-3 text-white flex items-center gap-2">
+            📊 Prediction Results
+        </h2>
+        <p class="text-gray-300 mb-4">
             Below is a preview of the predictions. Students marked in
-            <span class="badge bg-danger">HIGH RISK</span> are predicted to score
-            below the threshold you set.
+            <span class="bg-red-600 text-white px-2 py-1 rounded text-sm">HIGH RISK</span>
+            are predicted to score below the threshold you set.
         </p>
 
         <!-- Results Table -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+        <div class="bg-gray-800 shadow-lg rounded-lg border border-gray-700">
+            <div class="p-4 overflow-x-auto">
+                <div class="max-h-[500px] overflow-y-auto rounded">
                     {{ table_html | safe }}
                 </div>
             </div>
         </div>
 
         <!-- Action Buttons -->
-        <div class="d-flex align-items-center mt-3">
-            <a href="{{ download_url }}" class="btn btn-success me-3">
+        <div class="flex flex-wrap gap-3 mt-6">
+            <a href="{{ download_url }}"
+                class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg shadow-md transition duration-200 ease-in-out">
                 ⬇ Download Full Results (Excel)
             </a>
-            <a href="{{ url_for('upload') }}" class="btn btn-primary me-3">
+
+            <a href="{{ url_for('upload') }}"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow-md transition duration-200 ease-in-out">
                 📤 Upload Another File
             </a>
-            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+
+            <a href="{{ url_for('index') }}"
+                class="bg-gray-600 hover:bg-gray-700 text-white px-5 py-2 rounded-lg shadow-md transition duration-200 ease-in-out">
                 ⬅ Back to Home
             </a>
         </div>
