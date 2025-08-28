@@ -284,7 +284,7 @@ def upload():
     preview_html = df.head(200).to_html(classes='table table-striped table-hover', index=False)
 
     # ---- Choose what to render after upload ----
-    SHOW_CHARTS_AFTER_UPLOAD = True  # set False to keep your old 'results.html'
+    SHOW_CHARTS_AFTER_UPLOAD = False  # set False to keep your old 'results.html'
 
     if SHOW_CHARTS_AFTER_UPLOAD:
         payload = build_chart_payload_from_df(df)
@@ -294,7 +294,7 @@ def upload():
             **payload
         )
 
-    # Old behavior: table + download link
+    # ✅ Show predictions table instead of directly going to model_report
     return render_template(
         'results.html',
         table_html=preview_html,
