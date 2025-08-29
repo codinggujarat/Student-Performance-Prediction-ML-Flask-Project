@@ -14,10 +14,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- font share -->
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,700&f[]=clash-grotesk@200,300,400,700&f[]=chillax@200,400,500,700&f[]=panchang@200,300,400,500,600&f[]=poppins@100,200,300&f[]=quicksand@300,400,500&display=swap"
+        rel="stylesheet">
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            background: url("{{ url_for('static', filename='hero.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'General Sans', sans-serif;
+        }
+
+        /* Dark Overlay Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.10);
+            /* Dark transparent overlay */
+            z-index: -1;
         }
 
         /* Scrollbar Styling */
@@ -26,50 +45,57 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #4B5563;
+            background: #6366f1;
             border-radius: 6px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #1F2937;
+            background: #111827;
         }
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
-
-    <!-- Navbar -->
-    <nav class="bg-gray-800 shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<body class="text-gray-100 min-h-screen flex flex-col">
+    <!-- ✅ Navbar -->
+    <nav class="bg-gradient-to-r from-black/20 to-black/20  -lg sticky top-0 z-50">
+        <div class="max-w-10xl mx-auto px-6 py-4 sm:px-8 lg:px-10">
             <div class="flex items-center justify-between h-16">
+
                 <!-- Logo -->
-                <a href="/" class="flex items-center space-x-2 text-white font-bold text-lg">
-                    📊 Student Performance
+                <a href="/" class="flex items-center space-x-2">
+                    <span
+                        class="text-2xl font-extrabold bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent">
+                        GradeAI
+                    </span>
                 </a>
 
-                <!-- Buttons -->
-                <div class="flex space-x-4">
-                    <a href="/train"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200">
-                        Train Model
-                    </a>
-                    <a href="/download_sample"
-                        class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200">
-                        Download Sample CSV
-                    </a>
+                <!-- Center Navigation -->
+                <div class="hidden md:flex space-x-10">
+                    <div class="">
+                        <a href="/train" class="px-10 py-4 rounded-full bg-purple-500/20
+                                           text-white font-light shadow-lg text-lg hover:from-purple-600 hover:to-indigo-700 
+                                           transition duration-300 ease-in-out" style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+                            Train Model
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Alerts Section -->
+    <!-- ✅ Alerts Section -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 w-full">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, msg in messages %}
-        <div
-            class="p-4 mb-4 rounded-lg text-white text-sm 
-            {% if category == 'success' %}bg-green-600{% elif category == 'danger' %}bg-red-600{% else %}bg-yellow-500{% endif %}">
+        <div class="p-4 mb-4 rounded-lg text-white text-sm shadow-lg
+            {% if category == 'success' %}
+                bg-gradient-to-r from-green-500/20 to-emerald-600
+            {% elif category == 'danger' %}
+                bg-gradient-to-r from-red-500/20 to-pink-600
+            {% else %}
+                bg-gradient-to-r from-yellow-500/20 to-amber-600
+            {% endif %}">
             {{ msg }}
         </div>
         {% endfor %}
@@ -77,17 +103,12 @@
         {% endwith %}
     </div>
 
-    <!-- Main Content -->
+    <!-- ✅ Main Content -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 shadow-md mt-8 py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400 text-sm">
-            &copy; 2025 Student Performance Dashboard. All rights reserved.
-        </div>
-    </footer>
 
 </body>
 

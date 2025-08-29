@@ -1,52 +1,57 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex justify-center items-center min-h-[70vh] px-4">
+    <!-- Center Container -->
+    <div class="w-full sm:w-11/12 md:w-4/5 lg:w-4/5 xl:w-3/3 bg-transparent text-center">
 
-    <!-- Left Section -->
-    <div class="md:col-span-2 bg-gray-800 p-6 rounded-xl shadow-lg">
-        <h2 class="text-2xl font-bold text-white mb-3">🎓 Student Performance Prediction</h2>
-        <p class="text-gray-300 mb-5">
+        <!-- Heading -->
+        <h2 class=" text-4xl sm:text-5xl md:text-6xl font-bold uppercase font-extrabold bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent "
+            style="font-family: 'Panchang', sans-serif;font-weight: bolder !important;">
+            Student Performance Prediction
+        </h2>
+
+        <p class="text-gray-400 mb-6 leading-relaxed max-w-2xl mx-auto">
             Upload a <b>CSV</b> or <b>Excel</b> file containing student data
-            with the columns <code class="bg-gray-700 px-1 py-0.5 rounded text-green-400">Attendance</code>,
-            <code class="bg-gray-700 px-1 py-0.5 rounded text-green-400">Study_Hours</code>, and
-            <code class="bg-gray-700 px-1 py-0.5 rounded text-green-400">Past_Result</code>
+            with the columns <code class="bg-gray-800 px-1 py-0.5 rounded text-green-400">Attendance</code>,
+            <code class="bg-gray-800 px-1 py-0.5 rounded text-green-400">Study_Hours</code>, and
+            <code class="bg-gray-800 px-1 py-0.5 rounded text-green-400">Past_Result</code>
             to predict exam scores.
         </p>
 
         <!-- Buttons -->
-        <div class="flex flex-wrap gap-4 mt-4">
-            <a href="{{ url_for('upload') }}"
-                class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
-                📤 <span>Upload & Predict</span>
+        <div class="flex flex-wrap justify-center gap-4 mt-6">
+            <!-- Upload & Predict -->
+            <a href="{{ url_for('upload') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
+                       hover:to-indigo-700 
+                                           transition duration-300 ease-in-out"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+                Upload & Predict
             </a>
 
-            <a href="{{ url_for('train') }}"
-                class="bg-yellow-500 hover:bg-yellow-600 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
-                🔄 <span>Train / Re-train Model</span>
+            <!-- Train / Re-train Model -->
+            <a href="{{ url_for('train') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
+                       hover:to-indigo-700 
+                                           transition duration-300 ease-in-out"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+                Train / Re-train Model
             </a>
 
-            <a href="{{ url_for('download_sample') }}"
-                class="bg-green-600 hover:bg-green-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
-                ⬇ <span>Download Sample CSV</span>
+            <!-- Download Sample CSV -->
+            <a href="{{ url_for('download_sample') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
+                       hover:to-indigo-700 
+                                           transition duration-300 ease-in-out"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+                Download Sample CSV
             </a>
 
-            <a href="{{ url_for('model_report') }}"
-                class="bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
-                📊 <span>View Model Report</span>
+            <!-- View Model Report -->
+            <a href="{{ url_for('model_report') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
+                       hover:to-indigo-700 
+                                           transition duration-300 ease-in-out"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+                View Model Report
             </a>
         </div>
     </div>
-
-    <!-- Right Section - How It Works -->
-    <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
-        <h5 class="text-xl font-semibold text-white mb-4">📌 How It Works</h5>
-        <ul class="list-disc list-inside space-y-2 text-gray-300">
-            <li>Step 1: Train or load the ML model.</li>
-            <li>Step 2: Upload CSV / Excel student data.</li>
-            <li>Step 3: Predict student exam scores.</li>
-            <li>Step 4: Export results to Excel.</li>
-        </ul>
-    </div>
-
 </div>
 {% endblock %}

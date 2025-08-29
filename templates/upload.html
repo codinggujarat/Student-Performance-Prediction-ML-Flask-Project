@@ -1,75 +1,73 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<style>
+    input::placeholder {
+        font-family: 'General Sans', sans-serif !important;
+        font-weight: lighter !important;
+    }
+</style>
+<div class="flex justify-center items-center min-h-[80vh] px-4">
+    <!-- Center Container -->
+    <div class="w-full sm:w-11/12 md:w-4/5 lg:w-4/5 xl:w-5/5 font-extrabold bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent "
+        style="box-shadow: none !important;">
 
-    <!-- Left Section -->
-    <div class="md:col-span-2 bg-gray-800 p-6 rounded-xl shadow-lg">
-        <h2 class="text-2xl font-bold text-white mb-3">📤 Upload Student Data</h2>
-        <p class="text-gray-300 mb-5">
-            Please upload a <b>CSV</b> or <b>Excel</b> file containing the following columns:
-            <code class="bg-gray-700 text-green-400 px-1 py-0.5 rounded">Attendance</code>,
-            <code class="bg-gray-700 text-green-400 px-1 py-0.5 rounded">Study_Hours</code>, and
-            <code class="bg-gray-700 text-green-400 px-1 py-0.5 rounded">Past_Result</code>.
-            Optionally, you may include <code class="bg-gray-700 text-yellow-400 px-1 py-0.5 rounded">Student_ID</code>
-            for easier identification.
-        </p>
+        <!-- Heading -->
+        <h2 class="text-4xl sm:text-5xl md:text-4xl font-bold uppercase text-center text-white mb-6"
+            style="font-family: 'Panchang', sans-serif; font-weight: bolder !important;">
+            Upload Student Data
+        </h2>
 
         <!-- Upload Form -->
-        <form method="POST" enctype="multipart/form-data"
-            class="bg-gray-900 p-6 rounded-xl border border-gray-700 shadow-lg space-y-5">
+        <form method="POST" enctype="multipart/form-data" class="bg-transparent p-6 rounded-xl space-y-6"
+            style="box-shadow: none !important;">
 
             <!-- File Input -->
             <div>
-                <label for="file" class="block text-gray-200 font-semibold mb-2">Select CSV/Excel File</label>
-                <input
-                    class="w-full p-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="file" id="file" name="file" accept=".csv,.xlsx,.xls" required>
-                <small class="text-gray-400 text-sm">Allowed formats: CSV, XLSX, XLS</small>
+                <label for="file" class="block text-gray-200 font-light mb-2">Select CSV/Excel File</label>
+                <input class="w-full p-3 rounded-lg bg-gray-800/20 text-gray-200 border border-gray-600
+                           focus:outline-none focus:ring-2 focus:ring-blue-500" type="file" id="file" name="file"
+                    accept=".csv,.xlsx,.xls" required>
+                <small class="text-gray-400 text-sm "
+                    style="font-family: 'General Sans', sans-serif !important; font-weight: lighter !important;">Allowed formats:
+                    CSV, XLSX, XLS</small>
             </div>
 
             <!-- Risk Threshold Input -->
             <div>
-                <label for="threshold" class="block text-gray-200 font-semibold mb-2">High-Risk Threshold</label>
-                <input
-                    class="w-full p-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                    type="number" id="threshold" name="threshold" value="40" step="1" min="0" max="100">
-                <small class="text-gray-400 text-sm">
+                <label for="threshold" class="block text-gray-200 font-light mb-2">High-Risk Threshold</label>
+                <input class="w-full p-3 rounded-lg bg-gray-800/20 text-gray-200 border border-gray-600
+                           focus:outline-none focus:ring-2 focus:ring-yellow-500" type="number" id="threshold"
+                    name="threshold" value="40" step="1" min="0" max="100">
+                <small class="text-gray-400 text-sm  " style="font-weight: lighter !important;">
                     Students with predicted scores <b>below</b> this value will be marked as
-                    <span class="text-red-400 font-bold">HIGH RISK</span>.
+                    <span class="text-red-400 font-light">HIGH RISK</span>.
                 </small>
             </div>
 
             <!-- Buttons -->
-            <div class="flex flex-wrap gap-4 mt-4">
-                <button type="submit"
-                    class="bg-green-600 hover:bg-green-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
-                    🚀 <span>Upload & Predict</span>
+            <div class="flex flex-wrap justify-center sm:justify-start gap-3 mt-4">
+                <!-- Upload Button -->
+                <button type="submit" class="px-6 py-3 rounded-xl bg-purple-500/60 text-white font-medium shadow-lg text-sm
+                           hover:bg-purple-600 transition duration-300 ease-in-out"
+                    style="letter-spacing: 1px; font-family: 'General Sans', sans-serif;">
+                    Upload & Predict
                 </button>
 
-                <a href="{{ url_for('index') }}"
-                    class="bg-gray-600 hover:bg-gray-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
-                    ⬅ <span>Back to Home</span>
+                <!-- Model Report Button -->
+                <a href="{{ url_for('model_report') }}" class="px-6 py-3 rounded-xl bg-purple-500/60 text-white font-medium shadow-lg text-sm
+                           hover:bg-purple-600 transition duration-300 ease-in-out"
+                    style="letter-spacing: 1px; font-family: 'General Sans', sans-serif;">
+                    View Model Report
                 </a>
 
-                <a href="{{ url_for('model_report') }}"
-                    class="bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-lg shadow-md text-white text-lg transition duration-200 flex items-center space-x-2">
-                    📊 <span>View Model Report</span>
+                <!-- Back Button -->
+                <a href="{{ url_for('index') }}" class="px-6 py-3 rounded-xl bg-purple-500/60 text-white font-medium shadow-lg text-sm
+                           hover:bg-purple-600 transition duration-300 ease-in-out"
+                    style="letter-spacing: 1px; font-family: 'General Sans', sans-serif;">
+                    Back to Home
                 </a>
             </div>
         </form>
     </div>
-
-    <!-- Instructions Card -->
-    <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
-        <h5 class="text-xl font-semibold text-white mb-4">📌 Instructions</h5>
-        <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
-            <li>Ensure the file has correct column names.</li>
-            <li>Download <a href="{{ url_for('download_sample') }}"
-                    class="text-blue-400 underline hover:text-blue-300">sample CSV</a> for reference.</li>
-            <li>After uploading, you'll see a preview of predicted results.</li>
-            <li>Full results can be exported as Excel.</li>
-        </ul>
-    </div>
-
 </div>
 {% endblock %}
