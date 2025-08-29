@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="p-6 space-y-6">
+<!-- Left Container -->
+<div class="max-w-10xl bg-transparent text-left space-y-6">
 
     <!-- Page Title -->
-    <div class="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-6 text-center">
-        <h2 class="text-4xl sm:text-5xl md:text-4xl font-bold uppercase text-center text-white mb-6"
-            style="font-family: 'Panchang', sans-serif; font-weight: bolder !important;">
+    <div class="bg-white/5  bg-[#1C1C1C] rounded-2xl p-6 text-center">
+        <h2 class="text-4xl sm:text-5xl md:text-5xl  text-center font-extrabold capitalize bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent"
+            style="letter-spacing: 2px; font-family: 'Clash Grotesk', sans-serif; font-weight: normal !important;">
             Model Performance Report</h1>
             <p class="text-gray-300 mt-2 text-sm" style="font-weight: lighter;">
-                Latest results file: <span class="font-semibold text-white" style="font-family: 'General Sans', sans-serif; font-weight: lighter;">{{ file_name }}</span>
+                Latest results file: <span class="font-normal text-white"
+                    style="font-family: 'General Sans', sans-serif; font-weight: lighter;">{{ file_name }}</span>
             </p>
     </div>
 
@@ -16,37 +18,56 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <!-- Score Distribution -->
-        <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-5">
-            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">Predicted Score Distribution</h3>
-            <canvas id="scoreChart" class="w-full h-72"></canvas>
+        <div class="bg-white/5  bg-[#1C1C1C] rounded-2xl rounded-2xl shadow-2xl p-5">
+            <h3 class="text-lg font-normal text-white text-start mb-4  flex items-center gap-2 ">
+                <span class="bg-[#393939] p-2 rounded-lg w-10 h-10 flex items-center justify-center">
+                    <i class='bx bx-bar-chart-alt-2'></i>
+                </span>
+                Predicted Score Distribution
+            </h3>
+            <canvas id="scoreChart" class="w-full h-100"></canvas>
         </div>
 
         <!-- High vs Low Risk -->
-        <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-5">
-            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">High vs Low Risk</h3>
-            <canvas id="riskChart" class="w-full h-72"></canvas>
+        <div class="bg-white/5  bg-[#1C1C1C] rounded-2xl rounded-2xl shadow-2xl p-5">
+            <h3 class="text-lg font-normal text-white text-start mb-4  flex items-center gap-2 ">
+                <span class="bg-[#393939] p-2 rounded-lg w-10 h-10 flex items-center justify-center">
+                    <i class='bx bx-pie-chart-alt'></i>
+                </span>
+                High vs Low Risk
+            </h3>
+            <canvas id="riskChart" class="w-full h-100"></canvas>
         </div>
 
         {% if show_semester_charts %}
         <!-- Avg Score per Semester -->
-        <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-5">
-            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">Average Score per Semester</h3>
-            <canvas id="avgScoreChart" class="w-full h-72"></canvas>
+        <div class="bg-white/5  bg-[#1C1C1C] rounded-2xl rounded-2xl shadow-2xl p-5">
+            <h3 class="text-lg font-normal text-white text-start mb-4  flex items-center gap-2 ">
+                <span class="bg-[#393939] p-2 rounded-lg w-10 h-10 flex items-center justify-center">
+                    <i class='bx bx-line-chart'></i>
+                </span>
+
+                Average Score per Semester
+            </h3>
+            <canvas id="avgScoreChart" class="w-full h-100"></canvas>
         </div>
 
         <!-- High vs Low Risk per Semester -->
-        <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-5">
-            <h3 class="text-lg font-semibold text-cyan-400 text-center mb-4">High vs Low Risk per Semester</h3>
-            <canvas id="stackedChart" class="w-full h-72"></canvas>
+        <div class="bg-white/5  bg-[#1C1C1C] rounded-2xl rounded-2xl shadow-2xl p-5">
+            <h3 class="text-lg font-normal text-white text-start mb-4 flex items-center gap-2">
+                <span class="bg-[#393939] p-2 rounded-lg w-10 h-10 flex items-center ">
+                    <i class='bx bx-bar-chart-alt-2'></i>
+                </span>
+                High vs Low Risk per Semester
+            </h3>
+            <canvas id="stackedChart" class="w-full h-100"></canvas>
         </div>
         {% else %}
         <!-- No Semester Data -->
-        <div
-            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-5 flex items-center justify-center">
+        <div class="bg-white/5  bg-[#1C1C1C] rounded-2xl rounded-2xl shadow-2xl p-5 flex items-center justify-center">
             <p class="text-gray-400 text-center">⚠ Semester data not available in the latest results file.</p>
         </div>
-        <div
-            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-5 flex items-center justify-center">
+        <div class="bg-white/5  bg-[#1C1C1C] rounded-2xl rounded-2xl shadow-2xl p-5 flex items-center justify-center">
             <p class="text-gray-400 text-center">⚠ Semester data not available in the latest results file.</p>
         </div>
         {% endif %}
@@ -54,13 +75,14 @@
     </div>
 
     <!-- Back Button -->
-    <div class="text-center mt-6">
-        <a href="/" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
-                       hover:to-indigo-700 
-                                           transition duration-300 ease-in-out"
-            style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;"> Back to Dashboard
-        </a>
-    </div>
+    <a href="{{ url_for('index') }}" class="flex items-center gap-2 px-5 py-3 rounded-xl text-white font-light shadow-lg text-sm
+                       hover:text-gray-300 transition duration-300 ease-in-out  bg-[#1C1C1C]"
+        style="letter-spacing: 2px; font-family: 'General Sans', sans-serif; ">
+        <span class="bg-[#393939] px-3  py-2 rounded-lg  flex items-center">
+            <i class='bx bx-left-arrow-alt text-lg'></i>
+        </span>
+        Back to Home
+    </a>
 </div>
 
 <!-- Chart.js -->
@@ -95,15 +117,15 @@
             datasets: [{
                 label: "Students",
                 data: binned.values,
-                backgroundColor: "#34d399"
+                backgroundColor: "rgba(99,102,241,0.4)" // Indigo transparent
             }]
         },
         options: {
             responsive: true,
             plugins: { legend: { display: false } },
             scales: {
-                x: { ticks: { color: "#d1d5db" } },
-                y: { ticks: { color: "#d1d5db" } }
+                x: { ticks: { color: "#e5e7eb" } },
+                y: { ticks: { color: "#e5e7eb" } }
             }
         }
     });
@@ -114,7 +136,10 @@
             labels: Object.keys(riskCounts),
             datasets: [{
                 data: Object.values(riskCounts),
-                backgroundColor: ["#f87171", "#34d399"]
+                backgroundColor: [
+                    "rgba(248,113,113,0.6)", // Red transparent
+                    "rgba(139,92,246,0.6)"   // Purple transparent
+                ]
             }]
         },
         options: {
@@ -131,8 +156,8 @@
                 datasets: [{
                     label: "Avg Score",
                     data: avgScores,
-                    borderColor: "#60a5fa",
-                    backgroundColor: "rgba(96,165,250,0.2)",
+                    borderColor: "rgba(99,102,241,1)", // Indigo solid line
+                    backgroundColor: "rgba(99,102,241,0.2)", // Indigo transparent fill
                     fill: true
                 }]
             },
@@ -147,19 +172,87 @@
             data: {
                 labels: semesters,
                 datasets: [
-                    { label: "High", data: highCounts, backgroundColor: "#f87171" },
-                    { label: "Low", data: lowCounts, backgroundColor: "#34d399" }
+                    { label: "High", data: highCounts, backgroundColor: "rgba(248,113,113,0.6)" }, // Red transparent
+                    { label: "Low", data: lowCounts, backgroundColor: "rgba(139,92,246,0.6)" }     // Purple transparent
                 ]
             },
             options: {
                 responsive: true,
                 plugins: { legend: { labels: { color: "#e5e7eb" } } },
                 scales: {
-                    x: { stacked: true, ticks: { color: "#d1d5db" } },
-                    y: { stacked: true, ticks: { color: "#d1d5db" } }
+                    x: { stacked: true, ticks: { color: "#e5e7eb" } },
+                    y: { stacked: true, ticks: { color: "#e5e7eb" } }
                 }
             }
         });
     }
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false, // Important: allow fixed canvas height
+        plugins: { legend: { labels: { color: "#e5e7eb" } } },
+        scales: {
+            x: { ticks: { color: "#e5e7eb" } },
+            y: { ticks: { color: "#e5e7eb" } }
+        }
+    };
+
+    // Score Distribution
+    new Chart(document.getElementById("scoreChart"), {
+        type: "bar",
+        data: {
+            labels: binned.labels,
+            datasets: [{
+                label: "Students",
+                data: binned.values,
+                backgroundColor: "rgba(99,102,241,0.4)" // Indigo transparent
+            }]
+        },
+        options: chartOptions
+    });
+
+    // Risk Chart
+    new Chart(document.getElementById("riskChart"), {
+        type: "doughnut",
+        data: {
+            labels: Object.keys(riskCounts),
+            datasets: [{
+                data: Object.values(riskCounts),
+                backgroundColor: ["rgba(248,113,113,0.6)", "rgba(139,92,246,0.6)"]
+            }]
+        },
+        options: chartOptions
+    });
+
+    // Semester Charts
+    if (showSemester) {
+        new Chart(document.getElementById("avgScoreChart"), {
+            type: "line",
+            data: {
+                labels: semesters,
+                datasets: [{
+                    label: "Avg Score",
+                    data: avgScores,
+                    borderColor: "rgba(99,102,241,1)",
+                    backgroundColor: "rgba(99,102,241,0.2)",
+                    fill: true
+                }]
+            },
+            options: chartOptions
+        });
+
+        new Chart(document.getElementById("stackedChart"), {
+            type: "bar",
+            data: {
+                labels: semesters,
+                datasets: [
+                    { label: "High", data: highCounts, backgroundColor: "rgba(248,113,113,0.6)" },
+                    { label: "Low", data: lowCounts, backgroundColor: "rgba(139,92,246,0.6)" }
+                ]
+            },
+            options: { ...chartOptions, scales: { x: { stacked: true, ticks: { color: "#e5e7eb" } }, y: { stacked: true, ticks: { color: "#e5e7eb" } } } }
+        });
+    }
+
 </script>
+
 {% endblock %}

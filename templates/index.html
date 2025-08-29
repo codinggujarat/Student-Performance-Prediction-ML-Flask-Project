@@ -1,57 +1,69 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="flex justify-center items-center min-h-[70vh] px-4">
-    <!-- Center Container -->
-    <div class="w-full sm:w-11/12 md:w-4/5 lg:w-4/5 xl:w-3/3 bg-transparent text-center">
+<div class="flex justify-center items-center min-h-[70vh] px-8 py-12">
+    <!-- Left Container -->
+    <div class="w-full md:w-3/4 lg:w-2/3 bg-transparent text-left space-y-6">
 
         <!-- Heading -->
-        <h2 class=" text-4xl sm:text-5xl md:text-6xl font-bold uppercase font-extrabold bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent "
-            style="font-family: 'Panchang', sans-serif;font-weight: bolder !important;">
-            Student Performance Prediction
+        <h2 class="text-4xl sm:text-5xl md:text-5xl  text-center font-extrabold capitalize bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent"
+            style="letter-spacing: 2px; font-family: 'Clash Grotesk', sans-serif; font-weight: normal !important;">
+            Student Performance <br> Prediction
         </h2>
 
-        <p class="text-gray-400 mb-6 leading-relaxed max-w-2xl mx-auto">
-            Upload a <b>CSV</b> or <b>Excel</b> file containing student data
-            with the columns <code class="bg-gray-800 px-1 py-0.5 rounded text-green-400">Attendance</code>,
-            <code class="bg-gray-800 px-1 py-0.5 rounded text-green-400">Study_Hours</code>, and
-            <code class="bg-gray-800 px-1 py-0.5 rounded text-green-400">Past_Result</code>
+        <!-- Description -->
+        <p class="text-gray-300 leading-relaxed capitalize w-full  p-4  bg-[#1C1C1C]  rounded-lg">
+            Upload a <span class="text-yellow-200">CSV</span> or <span class="text-yellow-200" >Excel</span> file containing student data
+            with the columns
+            <code class="bg-[#242424] px-2 py-1 rounded text-white">Attendance</code> ,
+            <code class="bg-[#242424] px-2 py-1 rounded text-white">Study_Hours</code> , and
+            <code class="bg-[#242424] px-2 py-1 rounded text-white">Past_Result</code>
             to predict exam scores.
         </p>
 
+
         <!-- Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 mt-6">
-            <!-- Upload & Predict -->
-            <a href="{{ url_for('upload') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
-                       hover:to-indigo-700 
-                                           transition duration-300 ease-in-out"
-                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+        <!-- Include Boxicons CDN in your <head> -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- Buttons Grid: 2 Columns, 2 Rows with Icons -->
+        <div class="grid grid-cols-2 gap-4 mt-4">
+            <a href="{{ url_for('upload') }}" class="flex items-center gap-2 px-5 py-3 rounded-xl text-white font-light shadow-lg text-sm
+                   hover:text-gray-300 transition duration-300 ease-in-out  bg-[#1C1C1C]"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif; ">
+                <span class="bg-[#393939] p-2 rounded-lg  flex items-center">
+                    <i class='bx bx-upload text-lg'></i>
+                </span>
                 Upload & Predict
             </a>
 
-            <!-- Train / Re-train Model -->
-            <a href="{{ url_for('train') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
-                       hover:to-indigo-700 
-                                           transition duration-300 ease-in-out"
-                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+            <a href="{{ url_for('train') }}" class="flex items-center gap-2 px-5 py-3 rounded-xl text-white font-light shadow-lg text-sm
+                   hover:text-gray-300 transition duration-300 ease-in-out  bg-[#1C1C1C]"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif; ">
+                <span class="bg-[#393939] p-2 rounded-lg  flex items-center">
+                    <i class='bx bx-brain text-lg'></i>
+                </span>
                 Train / Re-train Model
             </a>
 
-            <!-- Download Sample CSV -->
-            <a href="{{ url_for('download_sample') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
-                       hover:to-indigo-700 
-                                           transition duration-300 ease-in-out"
-                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+            <a href="{{ url_for('download_sample') }}" class="flex items-center gap-2 px-5 py-3 rounded-xl text-white font-light shadow-lg text-sm
+                   hover:text-gray-300 transition duration-300 ease-in-out  bg-[#1C1C1C]"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif; ">
+                <span class="bg-[#393939] p-2 rounded-lg  flex items-center">
+                    <i class='bx bx-download text-lg'></i>
+                </span>
                 Download Sample CSV
             </a>
 
-            <!-- View Model Report -->
-            <a href="{{ url_for('model_report') }}" class="px-5 py-3 rounded-full bg-purple-500/20 text-white font-light shadow-lg text-sm
-                       hover:to-indigo-700 
-                                           transition duration-300 ease-in-out"
-                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif;">
+            <a href="{{ url_for('model_report') }}" class="flex items-center gap-2 px-5 py-3 rounded-xl text-white font-light shadow-lg text-sm
+                   hover:text-gray-300 transition duration-300 ease-in-out  bg-[#1C1C1C]"
+                style="letter-spacing: 2px; font-family: 'General Sans', sans-serif; ">
+                <span class="bg-[#393939] p-2 rounded-lg  flex items-center">
+                    <i class='bx bx-bar-chart-alt-2 text-lg'></i>
+                </span>
                 View Model Report
             </a>
         </div>
+
     </div>
 </div>
 {% endblock %}
