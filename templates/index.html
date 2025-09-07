@@ -12,7 +12,8 @@
 
         <!-- Description -->
         <p class="text-gray-300 leading-relaxed capitalize w-full  p-4  bg-[#1C1C1C]  rounded-lg">
-            Upload a <span class="text-yellow-200">CSV</span> or <span class="text-yellow-200" >Excel</span> file containing student data
+            Upload a <span class="text-yellow-200">CSV</span> or <span class="text-yellow-200">Excel</span> file
+            containing student data
             with the columns
             <code class="bg-[#242424] px-2 py-1 rounded text-white">Attendance</code> ,
             <code class="bg-[#242424] px-2 py-1 rounded text-white">Study_Hours</code> , and
@@ -26,7 +27,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
         <!-- Buttons Grid: 2 Columns, 2 Rows with Icons -->
-        <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
             <a href="{{ url_for('upload') }}" class="flex items-center gap-2 px-5 py-3 rounded-xl text-white font-light shadow-lg text-sm
                    hover:text-gray-300 transition duration-300 ease-in-out  bg-[#1C1C1C]"
                 style="letter-spacing: 2px; font-family: 'General Sans', sans-serif; ">
